@@ -1,18 +1,18 @@
-import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
-import { toastOptions } from "../../utils/toastOptions";
+import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../utils/toastOptions';
 
 export const useRegister = () => {
   const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("clicked");
+    console.log('clicked');
 
     handleValidation();
   };
@@ -20,7 +20,7 @@ export const useRegister = () => {
   const handleValidation = () => {
     const { confirmPassword, email, password, username } = values;
     if (password !== confirmPassword) {
-      toast.error("Passwords dosent match!", toastOptions);
+      toast.error('Passwords dosent match!', toastOptions);
     }
   };
 
