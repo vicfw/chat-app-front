@@ -6,8 +6,11 @@ export class RegisterService {
   static url = '/auth/register';
 
   static async register(body: RegisterServiceBody) {
-    const response = await instance.post(this.url, body);
-
-    return response;
+    try {
+      const { data } = await instance.post(this.url, body);
+      return { success: true, user: data.user };
+    } catch (e: any) {
+      return { success: false, error: e.response.data };
+    }
   }
 }

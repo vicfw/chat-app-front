@@ -1,10 +1,13 @@
-import * as Yup from 'yup';
-import { FormikValues } from './types';
 import { FormikHelpers } from 'formik';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import { RegisterService } from '../../utils/services/UserService';
+import { toastOptions } from '../../utils/toastOptions';
+import { FormikValues } from './types';
 
 export const useRegister = () => {
+  const navigate = useNavigate();
   const formikInitialValues = {
     username: '',
     password: '',
@@ -36,10 +39,29 @@ export const useRegister = () => {
     values: FormikValues,
     actions: FormikHelpers<FormikValues>
   ) => {
-    // await axios.post('http://localhost:3001/api/auth/register', values);
-
     const service = RegisterService;
-    await service.register(values);
+    //request to create user
+    const result = await service.register({
+      username: values.username,
+      password: values.password,
+      email: values.email,
+    });
+    //error handling
+    if (!result.success) {
+      if (result.error.message.includes('email')) {
+        actions.setErrors({ email: 'email already exist' });
+      } else if (result.error.message.includes('username')) {
+        actions.setErrors({ email: 'username already exist' });
+      } else {
+        toast.error('Something went wrong', toastOptions);
+      }
+      return;
+    }
+
+    //delete password and save user in localStorage
+    delete result.user.password;
+    localStorage.setItem('chat-app-user', JSON.stringify(result.user));
+    navigate('/');
   };
 
   return {
