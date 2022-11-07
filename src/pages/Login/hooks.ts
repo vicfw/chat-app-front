@@ -1,62 +1,48 @@
 import { FormikHelpers } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { RegisterService } from '../../utils/services/UserService';
-import { toastOptions } from '../../utils/toastOptions';
-import { FormikRegisterValues } from './types';
+import { FormikLoginValues } from './types';
 
-export const useRegister = () => {
+export const useLogin = () => {
   const navigate = useNavigate();
   const formikInitialValues = {
     username: '',
     password: '',
-    confirmPassword: '',
-    email: '',
   };
 
-  const SignUpSchema = Yup.object().shape({
+  const loginSchema = Yup.object().shape({
     username: Yup.string()
       .min(5, 'Should be 5 character long')
       .max(50, 'should not exceed 50 characters')
       .required('Username is required'),
 
-    email: Yup.string()
-      .email('invalid email address')
-      .required('Email is required'),
-
     password: Yup.string()
-      .min(5, 'Should be 5 character long')
-      .max(15, 'should not exceed 15 characters')
-      .required('Password is required'),
-    confirmPassword: Yup.string()
       .min(5, 'Should be 5 character long')
       .max(15, 'should not exceed 15 characters')
       .required('Password is required'),
   });
 
   const handleSubmit = async (
-    values: FormikRegisterValues,
-    actions: FormikHelpers<FormikRegisterValues>
+    values: FormikLoginValues,
+    actions: FormikHelpers<FormikLoginValues>
   ) => {
     console.log('clicked');
 
     const service = RegisterService;
-    //request to create user
-    const result = await service.register({
+    //request to login user
+
+    const result = await service.login({
       username: values.username,
       password: values.password,
-      email: values.email,
     });
+    console.log(result, 'result');
+
     //error handling
     if (!result.success) {
-      if (result.error.message.includes('email')) {
-        actions.setErrors({ email: 'email already exist' });
-      } else if (result.error.message.includes('username')) {
-        actions.setErrors({ email: 'username already exist' });
-      } else {
-        toast.error('Something went wrong', toastOptions);
-      }
+      actions.setErrors({ username: result.error.message });
+      actions.setErrors({ password: result.error.message });
+
       return;
     }
 
@@ -67,7 +53,7 @@ export const useRegister = () => {
   };
 
   return {
-    getter: { SignUpSchema, formikInitialValues },
+    getter: { loginSchema, formikInitialValues },
     setter: {},
     method: { handleSubmit },
   };
