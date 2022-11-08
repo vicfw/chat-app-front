@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
-import { useRegister } from './hooks';
-import { FormContainer } from './styles';
-
+import * as Hook from './hooks';
+import * as Style from './styles';
 import { Formik } from 'formik';
 import { ToastContainer } from 'react-toastify';
 import Logo from '../../assets/logo.svg';
 import { FormikRegisterValues } from './types';
 
 const Register = () => {
-  const { getter, method } = useRegister();
+  const { getter, method } = Hook.useRegister();
   return (
     <>
-      <FormContainer>
+      <Style.FormContainer>
         <Formik
           initialValues={getter.formikInitialValues}
           onSubmit={method.handleSubmit}
@@ -88,7 +87,7 @@ const Register = () => {
             );
           }}
         </Formik>
-      </FormContainer>
+      </Style.FormContainer>
       <ToastContainer />
     </>
   );

@@ -1,4 +1,4 @@
-import { instance } from '../axiosConfig';
+import { axiosInstance } from '../axiosConfig';
 import { LoginServiceBody, RegisterServiceBody } from './service.type';
 
 export class RegisterService {
@@ -7,7 +7,7 @@ export class RegisterService {
 
   static async register(body: RegisterServiceBody) {
     try {
-      const { data } = await instance.post(this.registerUrl, body);
+      const { data } = await axiosInstance.post(this.registerUrl, body);
       return { success: true, user: data.user };
     } catch (e: any) {
       return { success: false, error: e.response.data };
@@ -15,7 +15,7 @@ export class RegisterService {
   }
   static async login(body: LoginServiceBody) {
     try {
-      const { data } = await instance.post(this.loginUrl, body);
+      const { data } = await axiosInstance.post(this.loginUrl, body);
       return { success: true, user: data.user };
     } catch (e: any) {
       return { success: false, error: e.response.data };
