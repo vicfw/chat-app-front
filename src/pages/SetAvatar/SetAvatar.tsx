@@ -1,10 +1,19 @@
-import { ToastContainer } from 'react-toastify';
-import loader from '../../assets/loader.gif';
-import * as Style from './styles';
-import * as Hook from './hooks';
+import { ToastContainer } from "react-toastify";
+import loader from "../../assets/loader.gif";
+import * as Style from "./styles";
+import * as Hook from "./hooks";
+import Button from "../../components/Button/Button";
 
 const SetAvatar = () => {
-  const { getter } = Hook.useSetAvatar();
+  const { getter, setter, method } = Hook.useSetAvatar();
+
+  if (getter.isLoading) {
+    return (
+      <Style.Container>
+        <img src={loader} alt="loader" className="loader" />
+      </Style.Container>
+    );
+  }
 
   return (
     <>
@@ -17,17 +26,22 @@ const SetAvatar = () => {
             return (
               <div
                 className={`avatar ${
-                  +getter.selectedAvatar === index ? 'selected' : ''
+                  getter.selectedAvatar === index ? "selected" : ""
                 }`}
+                key={avatar}
               >
                 <img
                   src={`data:image/svg+xml;base64,${avatar}`}
-                  alt={'avatar' + index}
+                  alt={"avatar" + index}
+                  onClick={() => setter.setSelectedAvatar(index)}
                 />
               </div>
             );
           })}
         </div>
+        <Button onClick={method.handleSetProfilePicture}>
+          Set as Profile Picture
+        </Button>
       </Style.Container>
       <ToastContainer />
     </>

@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
-import * as Hook from './hooks';
-import * as Style from './styles';
-import { Formik } from 'formik';
-import { ToastContainer } from 'react-toastify';
-import Logo from '../../assets/logo.svg';
-import { FormikRegisterValues } from './types';
+import { Link } from "react-router-dom";
+import * as Hook from "./hooks";
+import * as Style from "./styles";
+import { Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+import Logo from "../../assets/logo.svg";
+import { FormikRegisterValues } from "./types";
+import Button from "../../components/Button/Button";
 
 const Register = () => {
   const { getter, method } = Hook.useRegister();
@@ -18,8 +19,8 @@ const Register = () => {
             let errors: FormikRegisterValues = {} as any;
 
             if (values.password !== values.confirmPassword) {
-              errors.password = 'Passwords dosent match.';
-              errors.confirmPassword = 'Passwords dosent match.';
+              errors.password = "Passwords dosent match.";
+              errors.confirmPassword = "Passwords dosent match.";
             }
             return errors;
           }}
@@ -77,11 +78,11 @@ const Register = () => {
                 {errors.confirmPassword && touched.confirmPassword ? (
                   <em>{errors.confirmPassword}</em>
                 ) : null}
-                <button type="submit" disabled={isSubmitting}>
+                <Button type="submit" disabled={isSubmitting}>
                   Create User
-                </button>
+                </Button>
                 <span>
-                  Already have an account ? <Link to={'/login'}>Login</Link>
+                  Already have an account ? <Link to={"/login"}>Login</Link>
                 </span>
               </form>
             );

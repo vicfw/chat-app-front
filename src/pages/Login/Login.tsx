@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
-import { useLogin } from './hooks';
-import { FormContainer } from './styles';
-import { Formik } from 'formik';
-import { ToastContainer } from 'react-toastify';
-import Logo from '../../assets/logo.svg';
+import { Link } from "react-router-dom";
+import { useLogin } from "./hooks";
+import { FormContainer } from "./styles";
+import { Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+import Logo from "../../assets/logo.svg";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
   const { getter, method } = useLogin();
@@ -54,12 +55,12 @@ const Login = () => {
                   <em>{errors.password}</em>
                 ) : null}
 
-                <button type="submit" disabled={isSubmitting}>
+                <Button type="submit" disabled={isSubmitting}>
                   Login
-                </button>
+                </Button>
                 <span>
-                  Don't have an account? ?{' '}
-                  <Link to={'/register'}>Register</Link>
+                  Don't have an account? ?{" "}
+                  <Link to={"/register"}>Register</Link>
                 </span>
               </form>
             );
