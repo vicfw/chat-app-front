@@ -1,24 +1,24 @@
-import { createBrowserRouter } from "react-router-dom";
-import Chat from "./pages/Chat";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import SetAvatar from "./pages/SetAvatar/SetAvatar";
+import { createBrowserRouter } from 'react-router-dom';
+import Chat from './pages/Chat/Chat';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import SetAvatar from './pages/SetAvatar/SetAvatar';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Chat />,
   },
   {
-    path: "/register",
+    path: '/register',
     element: <Register />,
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/avatar",
+    path: '/avatar',
     element: <SetAvatar />,
   },
 ]);

@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { useLogin } from "./hooks";
-import { FormContainer } from "./styles";
-import { Formik } from "formik";
-import { ToastContainer } from "react-toastify";
-import Logo from "../../assets/logo.svg";
-import Button from "../../components/Button/Button";
+import { Link } from 'react-router-dom';
+import { useLogin } from './hooks';
+import { FormContainer } from './styles';
+import { Formik } from 'formik';
+import { ToastContainer } from 'react-toastify';
+import Logo from '../../assets/logo.svg';
+import Button from '../../components/Button/Button';
 
 const Login = () => {
   const { getter, method } = useLogin();
@@ -25,8 +25,6 @@ const Login = () => {
             handleChange,
             values,
           }) => {
-            console.log(values);
-
             return (
               <form onSubmit={handleSubmit}>
                 <div className="brand">
@@ -59,8 +57,8 @@ const Login = () => {
                   Login
                 </Button>
                 <span>
-                  Don't have an account? ?{" "}
-                  <Link to={"/register"}>Register</Link>
+                  Don't have an account? ?{' '}
+                  <Link to={'/register'}>Register</Link>
                 </span>
               </form>
             );
