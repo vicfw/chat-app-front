@@ -32,7 +32,5 @@ export const useChat = () => {
     getAllUserHandler();
   }, [currentUser]);
 
-  console.log(currentUser);
-
   return { getter: { contacts, currentChat }, method: { handleChangeChat } };
 };

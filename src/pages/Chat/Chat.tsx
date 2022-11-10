@@ -1,3 +1,4 @@
+import ChatContainer from '../../components/ChatContainer/ChatContainer';
 import Contacts from '../../components/Contacts/Contacts';
 import Welcome from '../../components/Welcome/Welcome';
 import { useChat } from './hooks';
