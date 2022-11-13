@@ -32,7 +32,7 @@ export const useChat = () => {
 
   useEffect(() => {
     if (currentUser) {
-      socket.current = io('http://localhost:3001');
+      socket.current = io(import.meta.env.BASE_URL);
       socket.current.emit('add-user', currentUser._id);
     }
   }, [currentUser]);
