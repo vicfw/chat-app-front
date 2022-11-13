@@ -28,7 +28,7 @@ const ChatContainer: React.FC<Type.ChatContainerPropTypes> = ({
         <Logout />
       </div>
       <div className="chat-messages">
-        {getter.messages.map((message) => {
+        {getter.messages?.map((message) => {
           return (
             <div ref={getter.scrollRef} key={uuidv4()}>
               <div
