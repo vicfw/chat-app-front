@@ -1,10 +1,10 @@
 import { FormikHelpers } from 'formik';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { UserService } from '../../utils/services/UserService';
 import { toastOptions } from '../../utils/toastOptions';
-import useAuth from '../../utils/useAuth';
 import { FormikRegisterValues } from './types';
 
 export const useRegister = () => {
@@ -37,7 +37,12 @@ export const useRegister = () => {
   });
 
   // handle redirect authenticated user
-  useAuth();
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('chat-app-user') as string);
+    if (user) {
+      navigate('/');
+    }
+  }, []);
 
   const handleSubmit = async (
     values: FormikRegisterValues,
@@ -55,7 +60,7 @@ export const useRegister = () => {
       if (result.error.message.includes('email')) {
         actions.setErrors({ email: 'email already exist' });
       } else if (result.error.message.includes('username')) {
-        actions.setErrors({ email: 'username already exist' });
+        actions.setErrors({ username: 'username already exist' });
       } else {
         toast.error('Something went wrong', toastOptions);
       }

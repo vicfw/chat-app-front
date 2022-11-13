@@ -1,4 +1,5 @@
 import { FormikHelpers } from 'formik';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { UserService } from '../../utils/services/UserService';
@@ -25,7 +26,12 @@ export const useLogin = () => {
   });
 
   // handle redirect authenticated user
-  useAuth();
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('chat-app-user') as string);
+    if (user) {
+      navigate('/');
+    }
+  }, []);
 
   const handleSubmit = async (
     values: FormikLoginValues,

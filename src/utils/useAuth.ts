@@ -9,7 +9,6 @@ const useAuth = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('chat-app-user') as string);
     if (user) {
-      navigate('/');
       setCurrentUser(user);
     } else {
       navigate('/login');

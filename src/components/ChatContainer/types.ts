@@ -1,4 +1,6 @@
+import { PartialUser } from '../../utils/globalTypes';
+
 export interface ChatContainerPropTypes {
-  currentChat: any;
+  currentChat: PartialUser;
   socket: any;
 }

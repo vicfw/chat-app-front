@@ -1,14 +1,16 @@
+import ChatInput from '../ChatInput/ChatInput';
 import Logout from '../Logout/Logout';
+import { useChatContainer } from './hooks';
 import * as Style from './styles';
 import * as Type from './types';
-// import { v4 as uuidv4 } from 'uuid';
-// import ChatInput from './ChatInput';
-// import Logout from './Logout';
+import { v4 as uuidv4 } from 'uuid';
 
 const ChatContainer: React.FC<Type.ChatContainerPropTypes> = ({
   currentChat,
   socket,
 }) => {
+  const { getter, method } = useChatContainer(currentChat, socket);
+
   return (
     <Style.Container>
       <div className="chat-header">
@@ -26,9 +28,9 @@ const ChatContainer: React.FC<Type.ChatContainerPropTypes> = ({
         <Logout />
       </div>
       <div className="chat-messages">
-        {/* {messages.map((message) => {
+        {getter.messages.map((message) => {
           return (
-            <div ref={scrollRef} key={uuidv4()}>
+            <div ref={getter.scrollRef} key={uuidv4()}>
               <div
                 className={`message ${
                   message.fromSelf ? 'sended' : 'recieved'
@@ -40,9 +42,9 @@ const ChatContainer: React.FC<Type.ChatContainerPropTypes> = ({
               </div>
             </div>
           );
-        })} */}
+        })}
       </div>
-      {/* <ChatInput handleSendMsg={handleSendMsg} /> */}
+      <ChatInput handleSendMsg={method.handleSendMsg} />
     </Style.Container>
   );
 };

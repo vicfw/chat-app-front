@@ -17,8 +17,10 @@ const Chat = () => {
         {!getter.currentChat ? (
           <Welcome />
         ) : (
-          <div>sucka</div>
-          // <ChatContainer currentChat={currentChat} socket={socket} />
+          <ChatContainer
+            currentChat={getter.currentChat}
+            socket={getter.socket}
+          />
         )}
       </div>
     </Style.Container>

@@ -9,8 +9,6 @@ const Contacts: React.FC<Type.ContactsPropType> = ({
 }) => {
   const { getter, method } = useContacts(changeChat);
 
-  console.log(contacts, 'contacts');
-
   return (
     <>
       {getter.currentUserImage && getter.currentUserImage && (

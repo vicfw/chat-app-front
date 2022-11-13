@@ -10,3 +10,8 @@ export type PartialUser = Pick<
   User,
   '_id' | 'avatarImage' | 'email' | 'username'
 >;
+
+export interface Message {
+  fromSelf: boolean;
+  message: string;
+}
