@@ -32,7 +32,7 @@ export const useChat = () => {
 
   useEffect(() => {
     if (currentUser) {
-      socket.current = io(import.meta.env.BASE_URL);
+      socket.current = io(import.meta.env.VITE_BASE_URL);
       socket.current.emit('add-user', currentUser._id);
     }
   }, [currentUser]);
